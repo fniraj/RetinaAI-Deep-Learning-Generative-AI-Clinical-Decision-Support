@@ -65,6 +65,43 @@ The combined dataset consists of 3,806 retinal photographs obtained from APTOS 2
 
 The reported results represent internal development evaluation. Binary screening metrics were derived from the four-class predictions. Performance against other retinal diseases and patient-level independence have not been established.
 
+### Model Development and Training Methodology
+
+The diabetic retinopathy classifier was developed using transfer learning and selective fine-tuning of an ImageNet-pretrained MobileNetV3-Large architecture.
+
+The original classification layer was replaced with a four-class output layer for diabetic retinopathy severity classification.
+
+The model development pipeline incorporated:
+
+- Combined APTOS and JSIEC retinal fundus image datasets
+- Image preprocessing and resizing to 224 × 224 pixels
+- ImageNet-based normalization
+- Data augmentation using horizontal flipping and random rotation
+- Transfer learning and selective fine-tuning
+- Class-weighted cross-entropy loss
+- Adam optimization
+- Comparative evaluation of four model versions
+- Model selection based on validation accuracy and advanced DR recall
+- Performance evaluation using Scikit-learn
+
+Version 3 was selected for integration into the clinical decision support application based on its balanced classification performance.
+
+The trained classifier was subsequently integrated with Qwen2-VL-2B-Instruct for structured generative AI-assisted clinical explanations.
+
+### Computational Environment
+
+The entire model development, training, evaluation, and application execution were performed locally without a dedicated GPU.
+
+- Processor: AMD Ryzen 7 7730U
+- CPU: 8 cores and 16 logical processors
+- RAM: 16 GB
+- Graphics: AMD Radeon integrated graphics
+- Operating system: Windows 11
+- Development environment: Visual Studio Code
+- Deep learning framework: PyTorch
+
+This implementation demonstrates the feasibility of developing a lightweight healthcare AI research prototype in a resource-constrained computational environment.
+
 ## Clinical Workflow
 
 1. Upload a retinal fundus photograph.
@@ -82,6 +119,8 @@ The reported results represent internal development evaluation. Binary screening
 - MobileNetV3-Large
 - Qwen2-VL-2B-Instruct
 - Hugging Face Transformers
+- Transfer learning
+- Fine-Tuning
 - Scikit-learn
 - Streamlit
 - Pillow
